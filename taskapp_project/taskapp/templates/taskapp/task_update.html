@@ -1,0 +1,32 @@
+{%extends 'taskapp/main.html' %}
+  
+{% block content %}
+
+<style>
+    .custom-css-table{
+      margin-top:2%;
+    }
+    h1{
+      text-align:center;
+    }
+    .add-button-class{
+      text-align:center; 
+      margin-top: 20px;
+    }
+ </style>
+
+<a  href="{% url 'taskapp:home-view'  %}">
+    <div class="add-button-class">
+        <button type="button" class="btn btn-success col-6">Back To Home</button>
+    </div>
+</a>
+
+    
+<form class="add-button-class" method="post" >
+    {% csrf_token %}
+        {{ form.as_p}}
+    <input class="btn btn-success col-6" type="submit" value="Save">
+</form>
+
+
+{% endblock %}

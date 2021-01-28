@@ -1,0 +1,82 @@
+
+  {%extends 'taskapp/main.html' %}
+  
+  {% block content %}
+
+  <style>
+.custom-css-table{
+  margin-top:2%;
+}
+h1{
+  text-align:center;
+}
+h4{
+  text-align:center;
+  
+}
+.add-button-class{
+  text-align:center; 
+  margin-top: 20px;
+}
+.primary-key{
+  margin-left: 20px;
+}
+  </style>
+
+<h1 >A simple ''Task App'' with ''Django CRUD''</h1>
+<h4>By <a href="https://www.altafhosen.com/"><i>Altaf Hosen</i></a></h4>
+
+ <a  href="{% url 'taskapp:task-create'  %}">
+    <div class="add-button-class">
+        <button type="button" class="btn btn-success col-6 ">Click to Add</button>
+    </div>
+</a>
+
+<div class="custom-css-table">
+    <table   class="table table-hover ">
+        <tbody>
+ 
+            {% for task in task_list %}
+               <tr>
+               
+                 <th scope="col">
+                   <div  class="primary-key">
+                    <button type="button" class="btn btn-warning">{{task.pk}}</button>
+                   </div>
+                   
+                  </th>
+
+                
+                   <th scope="col"> 
+                    <a href="{% url 'taskapp:task-update' task.pk %}">
+                      <div>
+                      <button type="button" class="btn btn-warning">Update</button>
+                      </div>
+                    </a>
+                    </th>
+                  
+                 
+                   <th scope="col">
+                     <p>{{ task.headline }}</p>
+                   </th>
+
+               
+                   <th scope="col">
+              <form method="post" action="{% url 'taskapp:task-delete' task.pk %}" >
+                  {% csrf_token %}
+                  <input class="btn btn-danger" type="submit" value="Delete">
+              </form>
+            </th>
+
+               </tr>
+             {% endfor %}
+           </tbody>
+         
+       </table>
+       </div>
+
+
+
+
+  {% endblock %}
+
