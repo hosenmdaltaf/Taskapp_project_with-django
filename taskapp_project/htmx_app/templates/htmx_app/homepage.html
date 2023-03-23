@@ -33,94 +33,36 @@ h4{
     </div>
 </a> {% endcomment %}
 
- {% comment %} <div class="container" hx-post="{% url 'taskapp:task-create'  %}"
-hx-target="tr"
+ <!-- <div class="container" hx-post="{% url 'taskapp:task-create'  %}"
+hx-target="#test"
 hx-swap="afterend">
   <input type="text" class="col-6 mb-2" >
   <button type="button" class="btn btn-success col-6 ">Click to Add</button>
-</div>  {% endcomment %}
+</div>   -->
 
+<div class="container mt-5">
 <form class="flex mb-6 space-x-4">
   <input type="text" name="title" class="title flex-1 px-4 py-3 bg-gray-200 rounded-xl" placeholder="The title">
-  <button hx-post="{% url 'htmx_app:add_todo'  %}"
-  hx-target="tr"
-  hx-swap="innerHTML" class="p-3 rounded-xl text-white bg-cyan-500 hover:bg-cyan-600">+</button>
+  <button type="submits" hx-post="{% url 'htmx_app:add_todo'  %}" hx-target="#test"  hx-trigger="click"
+   class="p-3 rounded-xl text-white btn-success hover:bg-cyan-600">+</button>
 </form>
+</div>
+
 
 {% comment %} <div id="response-div"></div>
 <button hx-post="/register" hx-target="#response-div" hx-swap="beforeend">
     Register!
 </button> {% endcomment %}
 
-<div id="tryme"  class="custom-css-table">
+<div class="custom-css-table">
     <table   class="table table-hover">
-        <tbody id="test">
+        <tbody id="test" >
  
-            {% comment %} {% for task in task_list %}
-               <tr>
-               
-                 <th scope="col">
-                   <div  class="primary-key">
-                    <button type="button" class="btn btn-warning">{{task.pk}}</button>
-                   </div>
-                  </th>
-
-                   <th scope="col"> 
-                    <a hx-trigger='click'  hx-get="{% url 'htmx_app:task-update' task.pk %}">
-                      <div>
-                      <button type="button" class="btn btn-warning">Update</button>
-                      </div>
-                    </a>
-                    </th>
-                  
-                   <th scope="col">
-                     <p>{{ task.headline }}</p>
-                   </th>
-
-                 <th scope="col" >
-                     <form  >
-                      <button hx-confirm="Are you sure?" hx-target="#test" 
-                      hx-swap="innerHTML swap:1s" hx-delete="{% url 'htmx_app:task-delete' task.pk %}" class="btn btn-danger">Delete</button>
-                        </form> 
-                  </th> 
-               </tr>
-             {% endfor %} {% endcomment %}
-
-             <tr hx-get="{% url 'htmx_app:task_list' %}" hx-trigger="revealed" hx-swap="afterend">
-              <th scope="col">
-                <div  class="primary-key">
-                 <button type="button" class="btn btn-warning">{{task.pk}}</button>
-                </div>
-               </th>
-
-                <th scope="col"> 
-                 <a hx-trigger='click' >
-                   <div>
-                   <button type="button" class="btn btn-warning">Update</button>
-                   </div>
-                 </a>
-                 </th>
-               
-                <th scope="col">
-                  <p>{{ task.headline }}</p>
-                </th>
-
-              <th scope="col" >
-                  <form  >
-                   <button hx-confirm="Are you sure?" hx-target="#test" 
-                   hx-swap="innerHTML swap:1s"  class="btn btn-danger">Delete</button>
-                     </form> 
-               </th> 
-            </tr>
-
+          {% include 'htmx_app/partials/todo_list.html' %}
 
            </tbody>
-         
        </table>
-       </div>
-
-
-
+  </div>
 
   {% endblock %}
 

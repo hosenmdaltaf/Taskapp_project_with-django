@@ -1,0 +1,29 @@
+{% for task in task_list %}
+<tr  >
+
+  <th scope="col">
+    <div  class="primary-key">
+     <button type="button" class="btn btn-warning">{{task.pk}}</button>
+    </div>
+   </th>
+
+    <th scope="col"> 
+     <a hx-trigger='click'  hx-get="{% url 'htmx_app:task-update' task.pk %}">
+       <div>
+       <button type="button" class="btn btn-warning">Update</button>
+       </div>
+     </a>
+     </th>
+   
+    <th scope="col">
+      <p>{{ task.headline }}</p>
+    </th>
+
+  <th scope="col" >
+      <form  >
+       <button hx-confirm="Are you sure?" hx-target="#test" 
+       hx-delete="{% url 'htmx_app:delete_todo' task.pk %}" class="btn btn-danger">Delete</button>
+         </form> 
+   </th> 
+</tr>
+{% endfor %} 
